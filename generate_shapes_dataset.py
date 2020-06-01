@@ -1,10 +1,13 @@
-import numpy as np
-import os
-import cv2
 import json
-import matplotlib.pyplot as plt
-from skimage.io import imsave, imread
+import os
+import sys
+
+import cv2
+import numpy as np
 from tqdm.notebook import tqdm
+
+import matplotlib.pyplot as plt
+from skimage.io import imsave
 
 
 def imshow(image):
@@ -155,6 +158,7 @@ def create_dataset(num_samples,
         os.mkdir(os.path.join(save_dir, 'images'))
 
     dataset = {}
+    h, w = image_shape
 
     for i in tqdm(range(num_samples)):
         image_name = '{}.png'.format(i)
@@ -182,7 +186,7 @@ if __name__ == '__main__':
     h = w = sys.argv[1]
     max_objects = sys.argv[2]
     num_samples = 12500
-    dataset = create_dataset(num_samples, [h, w], max_objects=max_objects), save_dir = 'data')
+    dataset = create_dataset(num_samples, [h, w], max_objects=max_objects, save_dir='data')
 
     # for i, (image_path, annotation) in enumerate(dataset.items()):
     #     boxes=[]
